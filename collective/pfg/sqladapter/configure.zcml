@@ -1,0 +1,27 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.pfg.sqladapter">
+
+    <includeDependencies package="."/>
+
+    <five:registerPackage package="." initialize=".initialize" />
+
+    <class class=".sqladapter.SQLAdapter"/>
+
+    <subscriber for=".interfaces.ISQLAdapter
+                     Products.Archetypes.interfaces.IObjectInitializedEvent"
+                handler=".handlers.create_table"
+    />
+
+    <!-- Register the installation GenericSetup extension profile -->
+    <genericsetup:registerProfile
+        name="default"
+        title="collective.pfg.sqladapter"
+        directory="profiles/default"
+        description="A PloneFormGen adapter to save form data in a SQL database"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+</configure>
