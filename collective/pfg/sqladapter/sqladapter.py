@@ -5,6 +5,7 @@ from Products.ATContentTypes.content import schemata
 from Products.PloneFormGen.interfaces import IPloneFormGenActionAdapter
 from Products.PloneFormGen.content.actionAdapter import FormAdapterSchema
 from Products.PloneFormGen.content.actionAdapter import FormActionAdapter
+from ZPublisher.HTTPRequest import FileUpload
 from sqlalchemy import MetaData, Table
 from z3c.saconfig import named_scoped_session
 from collective.pfg.sqladapter.interfaces import ISQLAdapter
@@ -47,12 +48,21 @@ class SQLAdapter(FormActionAdapter):
         metadata = MetaData(bind=session.bind)
         table = Table(self.getTablename(), metadata, autoload=True)
         session.bind_table(table, session.bind)
-        
+
         record = {}
         for field in fields:
             fname = field.fgField.getName()
             if fname in table.columns:
                 val = REQUEST.form.get(fname, '')
+                if field.isFileField():
+                    file_ = REQUEST.form.get('%s_file' % fname)
+                    if isinstance(file_, FileUpload) and file_.filename != '':
+                        file_.seek(0)
+                        val = file_.read()
+                elif isinstance(val, str):
+                    val = val.decode('utf-8')
+                elif isinstance(val, list):
+                    val = '\n'.join(val).decode('utf-8')
                 record[fname] = val
         if record:
             # TODO: use the session for inserts

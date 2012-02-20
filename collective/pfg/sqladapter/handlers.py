@@ -1,5 +1,5 @@
 from sqlalchemy import MetaData, Table, Column, Sequence
-from sqlalchemy import String, Text, Boolean, Integer, DateTime, Float
+from sqlalchemy import String, Text, Boolean, Integer, DateTime, Float, LargeBinary
 
 
 def get_column(field):
@@ -19,6 +19,8 @@ def get_column(field):
         return Column(name, DateTime)
     elif type_ == 'fixedpoint':
         return Column(name, Float)
+    elif type_ in ['file', 'image']:
+        return Column(name, LargeBinary)
     return None
 
 
@@ -46,4 +48,3 @@ def create_table(obj, event):
             table.append_column(column)
 
     metadata.create_all(session.bind)
-
