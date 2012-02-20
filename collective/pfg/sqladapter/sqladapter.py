@@ -5,8 +5,10 @@ from Products.ATContentTypes.content import schemata
 from Products.PloneFormGen.interfaces import IPloneFormGenActionAdapter
 from Products.PloneFormGen.content.actionAdapter import FormAdapterSchema
 from Products.PloneFormGen.content.actionAdapter import FormActionAdapter
+from Products.PloneFormGen.config import FORM_ERROR_MARKER
 from ZPublisher.HTTPRequest import FileUpload
 from sqlalchemy import MetaData, Table
+from sqlalchemy.exc import NoSuchTableError
 from z3c.saconfig import named_scoped_session
 from collective.pfg.sqladapter.interfaces import ISQLAdapter
 from collective.pfg.sqladapter.config import PROJECTNAME
@@ -46,8 +48,11 @@ class SQLAdapter(FormActionAdapter):
 
         session = self.getSession()
         metadata = MetaData(bind=session.bind)
-        table = Table(self.getTablename(), metadata, autoload=True)
-        session.bind_table(table, session.bind)
+        try:
+            table = Table(self.getTablename(), metadata, autoload=True)
+        except NoSuchTableError:
+            return { FORM_ERROR_MARKER: 'Your form input could not be saved. '
+                     'No such table: %s' % self.getTablename() }
 
         record = {}
         for field in fields:
