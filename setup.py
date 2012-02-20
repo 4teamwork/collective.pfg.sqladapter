@@ -24,7 +24,7 @@ setup(name='collective.pfg.sqladapter',
       install_requires=[
           'setuptools',
           'Products.PloneFormGen',
-          'zope.sqlalchemy',
+          'z3c.saconfig',
       ],
       extras_require=dict(test=['plone.app.testing']),
       entry_points="""

@@ -5,27 +5,14 @@ from Products.ATContentTypes.content import schemata
 from Products.PloneFormGen.interfaces import IPloneFormGenActionAdapter
 from Products.PloneFormGen.content.actionAdapter import FormAdapterSchema
 from Products.PloneFormGen.content.actionAdapter import FormActionAdapter
-from sqlalchemy import create_engine, MetaData, Table
-from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.sql.expression import insert
-from zope.sqlalchemy import ZopeTransactionExtension
+from sqlalchemy import MetaData, Table
+from z3c.saconfig import named_scoped_session
 from collective.pfg.sqladapter.interfaces import ISQLAdapter
 from collective.pfg.sqladapter.config import PROJECTNAME
 from collective.pfg.sqladapter import _
 
 
 SQLAdapterSchema = FormAdapterSchema.copy() + atapi.Schema((
-
-    atapi.StringField(
-        'dsn',
-        required=True,
-        widget=atapi.StringWidget(
-            label=_(u"label_dsn", default=u"DSN"),
-            description=_(u"help_dsn", 
-                default=u"Provide the data source name for the database. "
-                         "(e.g. mysql://user:password@localhost/db)")
-         ),
-    ),
 
     atapi.StringField(
         'tablename',
@@ -35,10 +22,9 @@ SQLAdapterSchema = FormAdapterSchema.copy() + atapi.Schema((
             description=_(u"help_tablename",
                 default=u"Provide the name of the table where form input "
                          "data should be saved to. If the table doesn't "
-                         "exist yet, it will be created.")
+                         "exist yet, it will be created."),
          ),
     ),
-
 
 ))
 
@@ -73,12 +59,9 @@ class SQLAdapter(FormActionAdapter):
             #session.execute(table.insert().values(record))
             table.insert().execute(record)
 
-
     security.declarePrivate("getSession")
     def getSession(self):
-        engine = create_engine(self.getDsn())
-        Session = scoped_session(sessionmaker(bind=engine,
-                                 extension=ZopeTransactionExtension()))
+        Session = named_scoped_session('collective.pfg.sqladapter')
         return Session()
 
 atapi.registerType(SQLAdapter, PROJECTNAME)
