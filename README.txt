@@ -28,3 +28,11 @@ and enter the name of the table where the input data should be stored.
 If a table with the given name does not exist in your database, it will be
 created with columns corresponding to the fields in your form. Thus the "SQLAdapter"
 should be added after all fields were added.
+
+
+Copyright
+=========
+
+This package is copyright by `4teamwork <http://www.4teamwork.ch/>`_.
+
+``collective.pfg.sqladapter`` is licensed under GNU General Public License, version 2.
