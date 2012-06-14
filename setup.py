@@ -3,6 +3,10 @@ import os
 
 version = '1.0.1.dev0'
 
+test_requires = [
+    'plone.app.testing',
+    ]
+
 setup(name='collective.pfg.sqladapter',
       version=version,
       description="A PloneFormGen adapter that saves form input data in a SQL database",
@@ -21,12 +25,16 @@ setup(name='collective.pfg.sqladapter',
       namespace_packages=['collective', 'collective.pfg'],
       include_package_data=True,
       zip_safe=False,
+
       install_requires=[
           'setuptools',
           'Products.PloneFormGen',
           'z3c.saconfig',
       ],
-      extras_require=dict(test=['plone.app.testing']),
+
+      extras_require=dict(tests=test_requires),
+      test_requires=test_requires,
+
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
