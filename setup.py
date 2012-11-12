@@ -10,7 +10,7 @@ tests_require = [
 setup(name='collective.pfg.sqladapter',
       version=version,
       description="A PloneFormGen adapter that saves form input data in a SQL database",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
         "Framework :: Plone",
