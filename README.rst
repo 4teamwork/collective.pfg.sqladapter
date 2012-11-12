@@ -8,7 +8,7 @@ Setup
 To install `collective.pfg.sqladapter` add it to the list of eggs in your buildout.
 
 To configure the database, use z3c.saconfig and define a named scoped session
-"collective.pfg.sqladapter" in your configure.zcml or in the "zcml-additional" 
+"collective.pfg.sqladapter" in your configure.zcml or in the "zcml-additional"
 parameter of your buildout.
 
 Example::
@@ -28,6 +28,15 @@ and enter the name of the table where the input data should be stored.
 If a table with the given name does not exist in your database, it will be
 created with columns corresponding to the fields in your form. Thus the "SQLAdapter"
 should be added after all fields were added.
+
+
+Links
+=====
+
+- Main github project repository: https://github.com/4teamwork/collective.pfg.sqladapter
+- Issue tracker: https://github.com/4teamwork/collective.pfg.sqladapter/issues
+- Package on pypi: http://pypi.python.org/pypi/collective.pfg.sqladapter
+- Continuous integration: https://jenkins.4teamwork.ch/search?q=collective.pfg.sqladapter
 
 
 Copyright
