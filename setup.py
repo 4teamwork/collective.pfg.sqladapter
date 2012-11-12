@@ -3,7 +3,7 @@ import os
 
 version = '1.0.1.dev0'
 
-test_requires = [
+tests_require = [
     'plone.app.testing',
     ]
 
@@ -32,8 +32,8 @@ setup(name='collective.pfg.sqladapter',
           'z3c.saconfig',
       ],
 
-      extras_require=dict(tests=test_requires),
-      test_requires=test_requires,
+      extras_require=dict(tests=tests_require),
+      tests_require=tests_require,
 
       entry_points="""
       # -*- Entry points: -*-
