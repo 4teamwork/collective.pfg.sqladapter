@@ -38,6 +38,9 @@ setup(name='collective.pfg.sqladapter',
           'setuptools',
           'Products.PloneFormGen',
           'z3c.saconfig',
+
+          # Use SQLAlchemy 0.9.x for z3c.saconfig compatibility.
+          'sqlalchemy <1.0.0b',
       ],
 
       extras_require=dict(tests=tests_require),
