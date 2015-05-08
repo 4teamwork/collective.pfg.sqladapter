@@ -33,9 +33,9 @@ should be added after all fields were added.
 Links
 =====
 
-- Main github project repository: https://github.com/4teamwork/collective.pfg.sqladapter
-- Issue tracker: https://github.com/4teamwork/collective.pfg.sqladapter/issues
-- Package on pypi: http://pypi.python.org/pypi/collective.pfg.sqladapter
+- Github: https://github.com/4teamwork/collective.pfg.sqladapter
+- Issues: https://github.com/4teamwork/collective.pfg.sqladapter/issues
+- Pypi: http://pypi.python.org/pypi/collective.pfg.sqladapter
 - Continuous integration: https://jenkins.4teamwork.ch/search?q=collective.pfg.sqladapter
 
 
