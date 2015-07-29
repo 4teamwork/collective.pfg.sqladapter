@@ -36,7 +36,7 @@ setup(name='collective.pfg.sqladapter',
 
       install_requires=[
           'setuptools',
-          'Products.PloneFormGen',
+          'Products.PloneFormGen < 1.8.0.a',
           'z3c.saconfig',
 
           # Use SQLAlchemy 0.9.x for z3c.saconfig compatibility.
