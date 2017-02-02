@@ -18,7 +18,6 @@ setup(name='collective.pfg.sqladapter',
 
       classifiers=[
         'Framework :: Plone',
-        'Framework :: Plone :: 4.1',
         'Framework :: Plone :: 4.2',
         'Programming Language :: Python',
         ],
